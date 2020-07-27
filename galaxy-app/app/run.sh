@@ -6,10 +6,6 @@ export NODE_VERSION
 NODE_VERSION=$(/app/select_node_version.sh)
 export PATH="/node-v${NODE_VERSION}-linux-x64/bin:$PATH"
 
-# Install Datadog agent
-# This is done runtime, because otherwise we dont' have access to the env variables
-bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
-
 cd /app/bundle
 
 if [ -x run.sh ]; then
