@@ -16,7 +16,7 @@ if [[ $# -lt 1 ]]; then
   usage
 fi
 
-account="meteor"
+account="pathable"
 repo="$1"
 args="${*:2}"
 
