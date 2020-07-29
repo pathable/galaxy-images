@@ -2,9 +2,6 @@
 
 set -ex
 
-# Install Datadog agent
-bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
-
 # Download and untar bundle. Don't use timestamps from the deployer's computer:
 # if their clock is in the future, this can seriously confuse build systems like
 # make.

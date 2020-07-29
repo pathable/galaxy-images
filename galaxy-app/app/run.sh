@@ -2,6 +2,10 @@
 
 set -e
 
+# Add Datadog API key from env variables
+sh -c "sed 's/api_key:.*/api_key: ${DD_API_KEY}/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
+service datadog-agent start
+
 export NODE_VERSION
 NODE_VERSION=$(/app/select_node_version.sh)
 export PATH="/node-v${NODE_VERSION}-linux-x64/bin:$PATH"

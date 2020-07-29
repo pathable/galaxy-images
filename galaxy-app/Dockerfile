@@ -3,11 +3,15 @@ FROM meteor/ubuntu:20160830T182201Z_0f378f5
 # Make sure we have xz-utils so we can untar node binary, and jq to parse
 # star.json to choose the npm version.
 RUN apt-get update && \
-    apt-get install -y jq xz-utils && \
+    apt-get install -y wget jq xz-utils && \
     rm -rf /var/lib/apt/lists/*
 
 ADD ./app /app
 RUN mkdir -p /app/bundle
+
+RUN wget -P /app https://s3.amazonaws.com/apt.datadoghq.com/pool/d/da/datadog-agent_7.21.1-1_amd64.deb
+RUN dpkg -i /app/datadog-agent_7.21.1-1_amd64.deb
+RUN rm /app/datadog-agent_7.21.1-1_amd64.deb
 
 # Include some popular versions of Node (last updated 2018-Jun-26; see
 # docs/galaxy/base_image.md in the internal services repo for details on how to
