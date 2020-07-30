@@ -4,6 +4,10 @@ set -e
 
 # Add Datadog API key from env variables
 sh -c "sed 's/api_key:.*/api_key: ${DD_API_KEY}/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
+sh -c "sed -i 's/# hostname:.*/hostname: ${GALAXY_CONTAINER_ID}/' /etc/datadog-agent/datadog.yaml"
+sh -c "sed -i 's/# env:.*/env: ${DD_ENV}/' /etc/datadog-agent/datadog.yaml"
+sh -c "sed -i 's/# logs_enabled:.*/logs_enabled: true/' /etc/datadog-agent/datadog.yaml"
+
 service datadog-agent start
 
 export NODE_VERSION
